@@ -83,7 +83,7 @@ admin:
     bl printf
     pop {r9}
 
-    ldr r0, charInputMode
+    ldr r0, =charInputMode
     bl scanf
 
     pop {pc}
