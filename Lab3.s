@@ -92,7 +92,7 @@ buyCokeZero:
     bx lr
 
 cancelPurchase:
-    
+    b exit
     bx lr
 
 checkMoney:
