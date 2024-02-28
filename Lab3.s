@@ -100,7 +100,8 @@ checkMoney:
     bxlt lr
 
     mov r6, #0
-    sub r6, #55, r5
+    sub r6, r5, #55
+    rsblt r6, r6, #0
 
     ldr r0, =strNotEnoughMoney
     mov r1, r5
