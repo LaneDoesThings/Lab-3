@@ -111,25 +111,25 @@ drinkSelection:
     ldr r1, =strCoke
     push {r6}
     bleq buy
-    pop {r6}
+    @pop {r6}
 
     cmp r4, #'S'
     ldr r1, =strSprite
     push {r7}
     bleq buy
-    pop {r7}
+    @pop {r7}
 
     cmp r4, #'P'
     ldr r1, =strDrPepper
     push {r8}
     bleq buy
-    pop {r8}
+    @pop {r8}
 
     cmp r4, #'Z'
     ldr r1, =strCokeZero
     push {r9}
     bleq buy
-    pop {r9}
+    @pop {r9}
 
     cmp r4, #'X'
     bleq returnMoney
