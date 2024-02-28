@@ -97,6 +97,8 @@ addMoney:
 drinkSelection:
     push {lr}
 
+    mov r2, #0
+
     ldr r0, =strDrinkMessage
     bl printf
     ldr r0, =charInputMode
@@ -111,37 +113,43 @@ drinkSelection:
     ldr r1, =strCoke
     pusheq {r6}
     bleq buy
+    moveq r2, #1
     moveq r6, r0
 
     cmp r4, #'S'
     ldr r1, =strSprite
     pusheq {r7}
     bleq buy
+    moveq r2, #1
     moveq r7, r0
 
     cmp r4, #'P'
     ldr r1, =strDrPepper
     pusheq {r8}
     bleq buy
+    moveq r2, #1
     moveq r8, r0
 
     cmp r4, #'Z'
     ldr r1, =strCokeZero
     pusheq {r9}
     bleq buy
+    moveq r2, #1
     moveq r9, r0
 
     cmp r4, #'X'
+    moveq r2, #1
     bleq returnMoney
 
-    blne drinkSelection
+    cmp r2, #0
+    bleq drinkSelection
 
 
     pop {pc}
 
 buy:
     pop {r3}
-    push {lr}
+    push {r2, lr}
 
 
     bl confirmPurchase
@@ -160,7 +168,7 @@ buy:
         sub r0, r3, #1
 
     return:
-        pop {pc}
+        pop {r2, pc}
 
 confirmPurchase:
     push {r1, r3, lr}
@@ -187,13 +195,13 @@ completePurchase:
     pop {r3, pc}
 
 returnMoney:
-    push {lr}
+    push {r2, lr}
 
     ldr r0, =strChangeMessage
     mov r1, r5
     bl printf
 
-    pop {pc}
+    pop {r2, pc}
 
 readError:
     push {lr}
