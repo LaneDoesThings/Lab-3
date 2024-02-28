@@ -140,6 +140,8 @@ drinkSelection:
 buy:
     push {lr}
 
+    pop {r3}
+
     bl confirmPurchase
     cmp r0, #'N'
     beq return
