@@ -18,6 +18,10 @@ gdb ./Lab3
 
 
 main:
+    mov r4, #0
+    mov r5, #0
+
+
     ldr r0, =strWelcomeMessage
     bl printf
 
@@ -76,7 +80,7 @@ exit:
 strWelcomeMessage: .asciz "Welcome to the vending machine. All drinks cost 55 cents.\n"
 
 .balign 4
-strSelectionMessage: .asciz "Please enter money, select a drink, or enter the secret password (L).\n\n You may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B).\n You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n"
+strSelectionMessage: .asciz "Please enter money, select a drink, or enter the secret password (L).\n\nYou may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B).\nYou may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n\n"
 
 .balign 4
 charInputMode: .asciz "%c"
