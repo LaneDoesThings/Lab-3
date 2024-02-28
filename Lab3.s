@@ -114,17 +114,17 @@ drinkSelection:
 
     cmp r4, #'S'
     ldr r1, =strSprite
-    push {r7}
+    pusheq {r7}
     bleq buy
 
     cmp r4, #'P'
     ldr r1, =strDrPepper
-    push {r8}
+    pusheq {r8}
     bleq buy
 
     cmp r4, #'Z'
     ldr r1, =strCokeZero
-    push {r9}
+    pusheq {r9}
     bleq buy
 
     cmp r4, #'X'
