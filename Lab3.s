@@ -159,7 +159,7 @@ drinkSelection:
 
     cmp r2, #0
     bleq readError
-    bleq drinkSelection
+    blge drinkSelection
 
 
     pop {r2, pc}
@@ -203,7 +203,7 @@ buy:
         bl printf
         
         pop {r2}
-        mov r2, #0
+        mov r2, #2
         push {r2}
 
         b return
