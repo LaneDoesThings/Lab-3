@@ -138,7 +138,7 @@ drinkSelection:
     pop {pc}
 
 buy:
-    pop {r3}
+    @pop {r3}
     push {lr}
 
 
