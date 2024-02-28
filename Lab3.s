@@ -127,6 +127,9 @@ returnMoney:
 readError:
     push {lr}
 
+    ldr r0, =strError
+    bl printf
+
     ldr r0, =strInputMode
     ldr r1, =strInputError
     bl scanf
@@ -160,6 +163,9 @@ charInputMode: .asciz " %c"
 
 .balign 4
 charInput: .ascii "a"
+
+.balign 4
+strError: .asciz "Please enter a valid input.\n"
 
 .balign 4
 strInputError: .skip 100*4
