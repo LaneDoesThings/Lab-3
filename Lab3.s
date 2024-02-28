@@ -76,20 +76,23 @@ addDollar:
     bx lr
 
 buyCoke:
+    push {pc}
     bl checkMoney
-    bx lr
+    pop {lr}
 
 buySprite:
+    push {pc}
     bl checkMoney
-    bx lr
-
+    pop {lr}
 buyDrPepper:
+    push {pc}
     bl checkMoney
-    bx lr
+    pop {lr}
 
 buyCokeZero:
+    push {pc}
     bl checkMoney
-    bx lr
+    pop {lr}
 
 cancelPurchase:
     b exit
