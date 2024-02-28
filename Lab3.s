@@ -127,7 +127,7 @@ strWelcomeMessage: .asciz "Welcome to the vending machine. All drinks cost 55 ce
 strSelectionMessage: .asciz "Please enter money, select a drink, or enter the secret password (L).\n\nYou may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B).\nYou may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n\n"
 
 .balign 4
-charInputMode: .asciz "%c"
+charInputMode: .asciz " %c"
 
 .balign 4
 charInput: .ascii "a"
