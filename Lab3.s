@@ -201,7 +201,10 @@ buy:
     outOfInventory:
         ldr r0, =strOutOfInventory
         bl printf
-        bl drinkSelection
+        
+        pop {r2}
+        mov r2, #0
+        push {r2}
 
     purchase:
         mov r2, #55
