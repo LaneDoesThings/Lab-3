@@ -37,10 +37,10 @@ strSelectionMessage: .asciz "Please enter money, select a drink, or enter the se
                              You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X),\n"
 
 .balign 4
-charInputMode: .asciz "%c"
+charInputMode: .asciz "%c\n"
 
 .balign 4
-charInput: .byte 'a\n'
+charInput: .byte 'a'
 
 
 .global printf
