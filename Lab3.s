@@ -24,9 +24,9 @@ gdb ./Lab3
 main:
     mov r4, #0
     mov r5, #0
-    mov r6, #0
-    mov r7, #0
-    mov r8, #0
+    mov r6, #2
+    mov r7, #2
+    mov r8, #2
 
 
     ldr r0, =strWelcomeMessage
@@ -117,6 +117,7 @@ drinkSelection:
     cmp r4, #'C'
     ldr r1, =strCoke
     mov r2, #55
+    push {r6}
     bleq buy
     cmp r4, #'S'
     ldr r1, =strSprite
