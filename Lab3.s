@@ -158,8 +158,7 @@ buy:
 
     return:
         pop {lr}
-        push {r3}
-        push {lr}
+        push {r3, lr}
         pop {pc}
 
 confirmPurchase:
