@@ -111,6 +111,8 @@ checkMoney:
     mov r1, r5
     mov r2, r6
     bl printf
+
+    b input
     
     end:
     pop {lr}
