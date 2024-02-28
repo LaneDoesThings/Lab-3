@@ -27,7 +27,7 @@ input:
     ldr r0, =strInputMode
     ldr r1, =strInput
     bl scanf
-    ldr r1, =charInput
+    ldr r1, =strInput
     ldr r4, [r1]
 
     ldr r0, =strInputMode
