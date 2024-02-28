@@ -148,16 +148,15 @@ buy:
     bl confirmPurchase
 
     purchase:
-
         mov r2, #55
         sub r5, r5, r2
-        ldr r1, =strCoke
+        bl completePurchase
 
     return:
         pop {pc}
 
 confirmPurchase:
-    push {lr}
+    push {lr, r1}
 
     ldr r0, =strConfirmBuy
     bl printf
@@ -169,7 +168,7 @@ confirmPurchase:
     bleq readError
     ldr r1, =charInput
     ldr r0, [r1]
-    pop {pc}
+    pop {pc, r1}
 
 completePurchase:
     push {lr}
