@@ -90,12 +90,17 @@ addMoney:
     
     ldr r0, =strMoneyAdded
     add r5, r5, r1
+    mov r2, r5
     bl printf
 
     pop {pc}
 
 drinkSelection:
     push {lr}
+
+    bl checkEmpty
+    cmp r0, #4
+    beq exit
 
     mov r2, #0
 
@@ -147,9 +152,29 @@ drinkSelection:
 
     pop {pc}
 
+checkEmpty:
+    push {lr}
+
+    mov r0, #0
+
+    cmp r6, #0
+    addeq r0, #1
+    cmp r7, #0
+    addeq r0, #1
+    cmp r8, #0
+    addeq r0, #1
+    cmp r9, #0
+    addeq r0, #1
+
+    pop {pc}
+
+
 buy:
     pop {r3}
     push {r2, lr}
+
+    cmp r3, #0
+    beq outOfInventory
 
 
     bl confirmPurchase
@@ -160,6 +185,11 @@ buy:
     beq purchase
 
     bl confirmPurchase
+
+    outOfInventory:
+        ldr r0, =strOutOfInventory
+        bl printf
+        bl drinkSelection
 
     purchase:
         mov r2, #55
@@ -221,6 +251,9 @@ readError:
 Exit with code 0 (success)
  */
 exit:
+    ldr r0, =strEmpty
+    bl printf
+
     mov r7, #0x01
     mov r0, #0x00
     svc 0
@@ -240,7 +273,7 @@ strDrinkMessage: .asciz "You may select a drink of Coke (C), Sprite (S), Dr. Pep
 strChangeMessage: .asciz "You have recived %d cents back.\n\n\n"
 
 .balign 4
-strMoneyAdded: .asciz "You have entered %d cents.\n\n\n"
+strMoneyAdded: .asciz "You have entered %d cents and the total entered is %d.\n\n\n"
 
 .balign 4
 strConfirmBuy: .asciz "You have chosen %s. Is this correct? (Y or N)\n"
@@ -250,6 +283,12 @@ strPurchaseComplete: .asciz "You have bought a %s and have recived %d cents as c
 
 .balign 4
 strAmountLeft: .asciz "There are %d Coke(s), %d Sprite(s), %d Dr. Pepper(s), and %d Coke Zero(s) left.\n"
+
+.balign 4
+strOutOfInventory: .asciz "Sorry we are out of %s please select another drink.\n"
+
+.balign 4
+strEmpty: .asciz "We are out of drinks so the machine will shutdown now.\n"
 
 .balign 4
 strCoke: .asciz "Coke"
