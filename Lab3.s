@@ -97,7 +97,7 @@ cancelPurchase:
 
 checkMoney:
     cmp r5, #55
-    bxlt lr
+    bge end
 
     mov r6, #0
     sub r6, r5, #55
@@ -107,8 +107,8 @@ checkMoney:
     mov r1, r5
     mov r2, r6
     bl printf
-
-    bx lr
+    
+end:bx lr
 
 
 /*
