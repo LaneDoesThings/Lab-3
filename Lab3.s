@@ -30,30 +30,35 @@ input:
     ldr r1, =charInput
     ldr r4, [r1]
 
-    ldr r0, =test
-    mov r1, r4
-    bl printf
+    cmp r4, 'N'
+    bleq addNickel
+    cmp r4, 'D'
+    bleq addDime
+    cmp r4, 'Q'
+    bleq addQuarter
+    cmp r4, 'B'
+    bleq addDollar
+
+    b input
+
 
 
 addNickel:
-push {pc}
-
-pop {lr}
+    add r5, r5, #5
+    bx lr
 
 addDime:
-push {pc}
-
-pop {lr}
+    add r5, r5, #10
+    bx lr
 
 addQuarter:
-push {pc}
-
-pop {lr}
+    add r5, r5, #25
+    bx lr
 
 addDollar:
-push {pc}
+    add r5, r5, #100
+    bx lr
 
-pop {lr}
 
 
 
@@ -75,9 +80,6 @@ strSelectionMessage: .asciz "Please enter money, select a drink, or enter the se
 
 .balign 4
 charInputMode: .asciz "%c"
-
-.balign 4
-test: .asciz "Char: %c\n"
 
 .balign 4
 charInput: .ascii "a"
