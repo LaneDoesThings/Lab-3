@@ -111,21 +111,25 @@ drinkSelection:
     ldr r1, =strCoke
     pusheq {r6}
     bleq buy
+    moveq r6, r0
 
     cmp r4, #'S'
     ldr r1, =strSprite
     pusheq {r7}
     bleq buy
+    moveq r7, r0
 
     cmp r4, #'P'
     ldr r1, =strDrPepper
     pusheq {r8}
     bleq buy
+    moveq r8, r0
 
     cmp r4, #'Z'
     ldr r1, =strCokeZero
     pusheq {r9}
     bleq buy
+    moveq r9, r0
 
     cmp r4, #'X'
     bleq returnMoney
@@ -150,8 +154,7 @@ buy:
         mov r2, #55
         sub r5, r5, r2
         bl completePurchase
-        sub r3, r3, #1
-        pop {pc}
+        sub r0, r3, #1
 
     return:
         pop {pc}
