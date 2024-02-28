@@ -188,10 +188,10 @@ strMoneyMessage: .asciz "Please enter money, select a drink, or enter the secret
 strDrinkMessage: .asciz "You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n\n"
 
 .balign 4
-strChangeMessage: .asciz "You have recived %d cents back.\n"
+strChangeMessage: .asciz "You have recived %d cents back.\n\n\n"
 
 .balign 4
-strMoneyAdded: .asciz "You have entered %d cents.\n"
+strMoneyAdded: .asciz "You have entered %d cents.\n\n\n"
 
 .balign 4
 charInputMode: .asciz " %c"
