@@ -81,7 +81,9 @@ admin:
     mov r3, r8
     push {r9}
     bl printf
-    add sp, sp, #4
+    pop {r9}
+
+    bl scanf
 
     pop {pc}
 
