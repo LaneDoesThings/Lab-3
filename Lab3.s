@@ -30,13 +30,13 @@ input:
     ldr r1, =charInput
     ldr r4, [r1]
 
-    cmp r4, 'N'
+    cmp r4, #'N'
     bleq addNickel
-    cmp r4, 'D'
+    cmp r4, #'D'
     bleq addDime
-    cmp r4, 'Q'
+    cmp r4, #'Q'
     bleq addQuarter
-    cmp r4, 'B'
+    cmp r4, #'B'
     bleq addDollar
 
     b input
