@@ -30,7 +30,7 @@ input:
     ldr r1, =charInput
     ldr r4, [r1]
 
-    ldr r0, =charInputMode
+    ldr r0, =test
     mov r1, r4
     bl printf
 
@@ -75,6 +75,9 @@ strSelectionMessage: .asciz "Please enter money, select a drink, or enter the se
 
 .balign 4
 charInputMode: .asciz "%c"
+
+.balign 4
+test: .asciz "Char: %c\n"
 
 .balign 4
 charInput: .ascii "a"
