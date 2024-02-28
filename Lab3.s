@@ -111,7 +111,8 @@ checkMoney:
     mov r2, r6
     bl printf
     
-end:bx lr
+    end:
+    bx lr
 
 
 /*
