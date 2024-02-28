@@ -87,6 +87,13 @@ drinkSelection:
 
     ldr r0, =strDrinkMessage
     bl printf
+    ldr r0, =charInputMode
+    ldr r1, =charInput
+    bl scanf
+    cmp r0, #0
+    beq readError
+    ldr r1, =charInput
+    ldr r4, [r1]
 
     cmp r4, #'C'
     bleq buyCoke
