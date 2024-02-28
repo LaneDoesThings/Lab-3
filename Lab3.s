@@ -14,11 +14,11 @@ gdb ./Lab3
 .global main
 
 main:
-    mov r0, =strWelcomeMessage
+    ldr r0, =strWelcomeMessage
     bl printf
 
 input:
-    mov r0, =strSelectionMessage
+    ldr r0, =strSelectionMessage
     bl scanf
 
 
