@@ -99,6 +99,7 @@ cancelPurchase:
     bx lr
 
 checkMoney:
+    push {pc}
     cmp r5, #55
     bge end
 
@@ -112,7 +113,7 @@ checkMoney:
     bl printf
     
     end:
-    bx lr
+    pop {lr}
 
 
 /*
