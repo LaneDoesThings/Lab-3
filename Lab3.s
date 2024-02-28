@@ -34,6 +34,11 @@ main:
     bl printf
 
 input:
+
+    bl checkEmpty
+    cmp r0, #4
+    beq exit
+
     ldr r0, =strMoneyMessage
     bl printf
     ldr r0, =charInputMode
@@ -107,11 +112,6 @@ addMoney:
 
 drinkSelection:
     push {r2, lr}
-
-    bl checkEmpty
-    cmp r0, #4
-    beq exit
-
 
     ldr r0, =strDrinkMessage
     bl printf
