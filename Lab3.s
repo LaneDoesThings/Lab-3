@@ -24,13 +24,13 @@ main:
 input:
     ldr r0, =strSelectionMessage
     bl printf
-    ldr r0, =strInputMode
-    ldr r1, =strInput
+    ldr r0, =charInputMode
+    ldr r1, =charInput
     bl scanf
-    ldr r1, =strInput
+    ldr r1, =charInput
     ldr r4, [r1]
 
-    ldr r0, =strInputMode
+    ldr r0, =charInputMode
     mov r1, r4
     bl printf
 
@@ -74,10 +74,10 @@ strWelcomeMessage: .asciz "Welcome to the vending machine. All drinks cost 55 ce
 strSelectionMessage: .asciz "Please enter money, select a drink, or enter the secret password (password).\n\n You may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B).\n You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n"
 
 .balign 4
-strInputMode: .asciz "%s"
+charInputMode: .asciz "%c"
 
 .balign 4
-strInput: .ascii "a"
+charInput: .ascii "a"
 
 
 .global printf
