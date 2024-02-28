@@ -48,7 +48,7 @@ input:
     bleq cancelPurchase
 
     cmp r5, #55
-    bge drinkSelection
+    blge drinkSelection
 
     b input
 
