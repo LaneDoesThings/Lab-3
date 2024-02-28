@@ -218,7 +218,7 @@ exit:
 strWelcomeMessage: .asciz "Welcome to the vending machine. All drinks cost 55 cents.\n"
 
 .balign 4
-strMoneyMessage: .asciz "Please enter money, select a drink, or enter the secret password (L).\n\nYou may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B), or you may exit the machine with a refund (X).\n\n"
+strMoneyMessage: .asciz "Please enter money or enter the secret password (L).\n\nYou may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B), or you may exit the machine with a refund (X).\n\n"
 
 .balign 4
 strDrinkMessage: .asciz "You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n\n"
@@ -236,16 +236,16 @@ strConfirmBuy: .asciz "You have Chosen %s. Is this correct? (Y or N)\n"
 strPurchaseComplete: .asciz "You have bought a %s and have recived %d cents as change.\n"
 
 .balign 4
-strCoke: .asciz "Coke\0"
+strCoke: .asciz "Coke"
 
 .balign 4
-strSprite: .asciz "Sprite\0"
+strSprite: .asciz "Sprite"
 
 .balign 4
-strDrPepper: .asciz "Dr. Pepper\0"
+strDrPepper: .asciz "Dr. Pepper"
 
 .balign 4
-strCokeZero: .asciz "Coke Zero\0"
+strCokeZero: .asciz "Coke Zero"
 
 .balign 4
 charInputMode: .asciz " %c"
