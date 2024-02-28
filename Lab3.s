@@ -110,28 +110,28 @@ drinkSelection:
     ldr r4, [r1]
 
     cmp r4, #'C'
-    ldr r1, =strCoke
+    ldreq r1, =strCoke
     pusheq {r6}
     bleq buy
     moveq r2, #1
     moveq r6, r0
 
     cmp r4, #'S'
-    ldr r1, =strSprite
+    ldreq r1, =strSprite
     pusheq {r7}
     bleq buy
     moveq r2, #1
     moveq r7, r0
 
     cmp r4, #'P'
-    ldr r1, =strDrPepper
+    ldreq r1, =strDrPepper
     pusheq {r8}
     bleq buy
     moveq r2, #1
     moveq r8, r0
 
     cmp r4, #'Z'
-    ldr r1, =strCokeZero
+    ldreq r1, =strCokeZero
     pusheq {r9}
     bleq buy
     moveq r2, #1
