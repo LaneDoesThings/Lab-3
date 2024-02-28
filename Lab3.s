@@ -59,8 +59,8 @@ addNickel:
     
     ldr r0, =strMoneyAdded
     mov r1, #5
-    bl printf
     add r5, r5, r1
+    bl printf
 
     pop {pc}
 
@@ -69,8 +69,8 @@ addDime:
 
     ldr r0, =strMoneyAdded
     mov r1, #10
-    bl printf
     add r5, r5, r1
+    bl printf
 
     pop {pc}
 
@@ -79,8 +79,8 @@ addQuarter:
 
     ldr r0, =strMoneyAdded
     mov r1, #25
-    bl printf
     add r5, r5, r1
+    bl printf
 
     pop {pc}
 
@@ -89,8 +89,8 @@ addDollar:
 
     ldr r0, =strMoneyAdded
     mov r1, #100
-    bl printf
     add r5, r5, r1
+    bl printf
 
     pop {pc}
 
