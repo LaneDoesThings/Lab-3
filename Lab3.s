@@ -154,10 +154,10 @@ buy:
         mov r2, #55
         sub r5, r5, r2
         sub r3, r3, #1
+        bl completePurchase
         pop {lr}
         push {r3}
         push {lr}
-        bl completePurchase
 
     return:
         pop {pc}
