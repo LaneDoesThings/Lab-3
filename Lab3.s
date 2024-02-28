@@ -140,8 +140,6 @@ buy:
     push {lr}
 
     bl confirmPurchase
-    pop {r0}
-
     cmp r0, #'N'
     beq return
     cmp r0, #'Y'
@@ -170,8 +168,7 @@ confirmPurchase:
     cmp r0, #0
     bleq readError
     ldr r1, =charInput
-    ldr r1, [r1]
-    push {r1}
+    ldr r0, [r1]
     pop {pc}
 
 completePurchase:
