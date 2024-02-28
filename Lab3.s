@@ -26,11 +26,13 @@ main:
     bl printf
 
 input:
-    ldr r0, =strSelectionMessage
+    ldr r0, =strMoneyMessage
     bl printf
     ldr r0, =charInputMode
     ldr r1, =charInput
     bl scanf
+    cmp r0, #0
+    beq readError
     ldr r1, =charInput
     ldr r4, [r1]
 
@@ -42,18 +44,11 @@ input:
     bleq addQuarter
     cmp r4, #'B'
     bleq addDollar
-
-    cmp r4, #'C'
-    bleq buyCoke
-    cmp r4, #'S'
-    bleq buySprite
-    cmp r4, #'P'
-    bleq buyDrPepper
-    cmp r4, #'Z'
-    bleq buyCokeZero
-
     cmp r4, #'X'
     bleq cancelPurchase
+
+    cmp r5, #55
+    bge drinkSelection
 
     b input
 
@@ -75,48 +70,68 @@ addDollar:
     add r5, r5, #100
     bx lr
 
+drinkSelection:
+    push {pc}
+
+    ldr r0, =strDrinkMessage
+    bl printf
+
+    cmp r4, #'C'
+    bleq buyCoke
+    cmp r4, #'S'
+    bleq buySprite
+    cmp r4, #'P'
+    bleq buyDrPepper
+    cmp r4, #'Z'
+    bleq buyCokeZero
+    cmp r4, #'X'
+    bleq cancelPurchase
+
+
+    pop {lr}
+
 buyCoke:
     push {pc}
-    bl checkMoney
+
     pop {lr}
 
 buySprite:
     push {pc}
-    bl checkMoney
+
     pop {lr}
 buyDrPepper:
     push {pc}
-    bl checkMoney
+
     pop {lr}
 
 buyCokeZero:
     push {pc}
-    bl checkMoney
+
     pop {lr}
 
 cancelPurchase:
-    b exit
-    bx lr
-
-checkMoney:
     push {pc}
-    cmp r5, #55
-    bge end
 
-    mov r6, #0
-    sub r6, r5, #55
-    rsblt r6, r6, #0
+    bl returnMoney
 
-    ldr r0, =strNotEnoughMoney
-    mov r1, r5
-    mov r2, r6
-    bl printf
-
-    b input
-    
-    end:
     pop {lr}
 
+returnMoney:
+    ldr r0, =strChangeMessage
+    mov r1, r5
+    bl printf
+
+    bx lr
+
+
+readError:
+    push {lr}
+
+    ldr r0, =strInputMode
+    ldr r1, =strInputError
+    bl scanf
+
+    pop {pc}
 
 /*
 Exit with code 0 (success)
@@ -132,7 +147,13 @@ exit:
 strWelcomeMessage: .asciz "Welcome to the vending machine. All drinks cost 55 cents.\n"
 
 .balign 4
-strSelectionMessage: .asciz "Please enter money, select a drink, or enter the secret password (L).\n\nYou may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B).\nYou may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n\n"
+strMoneyMessage: .asciz "Please enter money, select a drink, or enter the secret password (L).\n\nYou may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B), or you may exit the machine with a refund (X).\n\n"
+
+.balign 4
+strDrinkMessage: .asciz "You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n\n"
+
+.balign 4
+strChangeMessage: .asciz "You have recived %d change back.\n"
 
 .balign 4
 charInputMode: .asciz " %c"
@@ -141,8 +162,10 @@ charInputMode: .asciz " %c"
 charInput: .ascii "a"
 
 .balign 4
-strNotEnoughMoney: .asciz "You need 55 cents to buy this drink but you only have %d cents entered please enter %d more.\n"
+strInputError: .skip 100*4
 
+.balign 4
+strInputMode: .asciz "%[^\n]"
 
 .global printf
 .global scanf
