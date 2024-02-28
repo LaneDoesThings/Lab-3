@@ -59,28 +59,28 @@ addNickel:
 
     add r5, r5, #5
 
-    push {lr}
+    pop {pc}
 
 addDime:
     push {lr}
 
     add r5, r5, #10
 
-    push {lr}
+    pop {pc}
 
 addQuarter:
     push {lr}
 
     add r5, r5, #25
 
-    push {lr}
+    pop {pc}
 
 addDollar:
     push {lr}
 
     add r5, r5, #100
 
-    push {lr}
+    pop {pc}
 
 drinkSelection:
     push {lr}
