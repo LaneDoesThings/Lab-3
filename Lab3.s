@@ -52,7 +52,7 @@ input:
     cmp r4, #'B'
     bleq addDollar
     cmp r4, #'X'
-    bleq cancelPurchase
+    bleq returnMoney
 
     cmp r5, #55
     blge drinkSelection
