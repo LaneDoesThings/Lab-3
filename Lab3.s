@@ -22,6 +22,7 @@ gdb ./Lab3
 
 
 main:
+    @Set the initial value 
     mov r4, #0
     mov r5, #0
     mov r6, #2
@@ -29,11 +30,18 @@ main:
     mov r8, #2
     mov r9, #2
 
-
+    @Welcome the user
     ldr r0, =strWelcomeMessage
     bl printf
 
 input:
+
+    @Check if the machine is empty and if it is exit the program
+    bl checkEmpty
+    cmp r0, #4
+    beq exit
+
+    @Get the money input from the user
     ldr r0, =strMoneyMessage
     bl printf
     ldr r0, =charInputMode
@@ -44,8 +52,9 @@ input:
     ldr r1, =charInput
     ldr r4, [r1]
 
-    mov r2, #0
+    mov r2, #0 @used for checking valid input
 
+    @The following check if the user imput a valid option and complete the task asked if valid
     cmp r4, #'N'
     moveq r1, #5
     moveq r2, #1
@@ -77,11 +86,15 @@ input:
     cmp r5, #55
     blge drinkSelection
 
-
+    @A valid option was not entered
     cmp r2, #0
     bleq readError
     b input
 
+
+/*
+Shows the amount of drinks left
+ */
 admin:
     push {r2, lr}
 
@@ -95,6 +108,10 @@ admin:
 
     pop {r2, pc}
 
+
+/*
+Adds the money specified in r1 to the total
+ */
 addMoney:
     push {r2, lr}
     
@@ -105,14 +122,14 @@ addMoney:
 
     pop {r2, pc}
 
+
+/*
+If the user has entered more than 55 cents prompt them to buy a drink
+ */
 drinkSelection:
     push {r2, lr}
 
-    bl checkEmpty
-    cmp r0, #4
-    beq exit
-
-
+    @Prompt the user to select a drink
     ldr r0, =strDrinkMessage
     bl printf
     ldr r0, =charInputMode
@@ -123,8 +140,9 @@ drinkSelection:
     ldr r1, =charInput
     ldr r4, [r1]
 
-    mov r2, #0
+    mov r2, #0 @used for checking valid input
 
+    @The following check if the user imput a valid option and complete the task asked if valid
     cmp r4, #'C'
     ldreq r1, =strCoke
     pusheq {r6}
@@ -157,16 +175,21 @@ drinkSelection:
     moveq r2, #1
     bleq returnMoney
 
+    @A valid option was not entered
     cmp r2, #0
     bleq readError
     bleq drinkSelection
 
+    @A valid option was entered but the user still needs to be reprompted
     cmp r2, #2
     bleq drinkSelection
 
 
     pop {r2, pc}
 
+/*
+Checks if the machine is empty
+ */
 checkEmpty:
     push {lr}
 
@@ -184,14 +207,19 @@ checkEmpty:
     pop {pc}
 
 
+/*
+Buys the drink the user specified and return the change if any
+Also checks if the drink is out if stock
+ */
 buy:
     pop {r3}
     push {r2, lr}
 
+    @The drink is out of stock
     cmp r3, #0
     beq outOfInventory
 
-
+    @Make the user confirm the purchase
     bl confirmPurchase
     cmp r0, #'N'
     moveq r0, r3
@@ -199,20 +227,21 @@ buy:
     cmp r0, #'Y'
     beq purchase
 
-    bl confirmPurchase
+    bl confirmPurchase @The user didn't input a 'Y' or 'N' so reprompt them
 
     outOfInventory:
-        ldr r0, =strOutOfInventory
+        ldr r0, =strOutOfInventory @Tell the user the drink is out of stock
         bl printf
         
         pop {r2}
-        mov r2, #2
+        mov r2, #2 @input reprompt code
         push {r2}
 
         mov r0, #0
         b return
 
     purchase:
+        @Remove 55 cents from the machine and return the rest
         mov r2, #55
         sub r5, r5, r2
         bl completePurchase
@@ -221,6 +250,10 @@ buy:
     return:
         pop {r2, pc}
 
+
+/*
+Makes the user confirm they want to buy that drink
+ */
 confirmPurchase:
     push {r1, r3, lr}
 
@@ -236,6 +269,10 @@ confirmPurchase:
     ldr r0, [r1]
     pop {r1, r3, pc}
 
+
+/*
+Tells the user they completed the purchase and how much money they got back
+ */
 completePurchase:
     push {r3, lr}
 
@@ -246,6 +283,10 @@ completePurchase:
 
     pop {r3, pc}
 
+
+/*
+Returns the users money if they cancel the purchase
+ */
 returnMoney:
     push {r2, lr}
 
@@ -256,6 +297,9 @@ returnMoney:
 
     pop {r2, pc}
 
+/*
+Tell the user the input was not valid
+ */
 readError:
     push {r2, lr}
 
