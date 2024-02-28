@@ -15,11 +15,18 @@ gdb ./Lab3
 
 @r4: The value the user input
 @r5: The total money input
+@r6: Amount of Coke
+@r7: Amount of Sprite
+@r8: Amount of Dr. Pepper
+@r8: Amount of Coke Zero
 
 
 main:
     mov r4, #0
     mov r5, #0
+    mov r6, #0
+    mov r7, #0
+    mov r8, #0
 
 
     ldr r0, =strWelcomeMessage
@@ -32,7 +39,7 @@ input:
     ldr r1, =charInput
     bl scanf
     cmp r0, #0
-    beq readError
+    bleq readError
     ldr r1, =charInput
     ldr r4, [r1]
 
@@ -103,49 +110,78 @@ drinkSelection:
     ldr r1, =charInput
     bl scanf
     cmp r0, #0
-    beq readError
+    bleq readError
     ldr r1, =charInput
     ldr r4, [r1]
 
     cmp r4, #'C'
-    bleq buyCoke
+    ldr r1, =strCoke
+    mov r2, #55
+    bleq buy
     cmp r4, #'S'
-    bleq buySprite
+    ldr r1, =strSprite
+    mov r2, #55
+    bleq buy
     cmp r4, #'P'
-    bleq buyDrPepper
+    ldr r1, =strDrPepper
+    mov r2, #55
+    bleq buy
     cmp r4, #'Z'
-    bleq buyCokeZero
+    ldr r1, =strCokeZero
+    mov r2, #55
+    bleq buy
     cmp r4, #'X'
-    bleq cancelPurchase
+    bleq returnMoney
 
 
     pop {pc}
 
-buyCoke:
+buy:
     push {lr}
 
-    pop {pc}
+    bl confirmPurchase
+    pop {r0}
 
-buySprite:
+    cmp r0, #'N'
+    beq return
+    cmp r0, #'Y'
+    beq purchase
+
+    bl confirmPurchase
+
+    purchase:
+
+        mov r2, #55
+        sub r5, r5, r2
+        ldr r1, =strCoke
+
+    return:
+        pop {pc}
+
+confirmPurchase:
     push {lr}
 
+    ldr r0, =strConfirmBuy
+    bl printf
+
+    ldr r0, =charInputMode
+    ldr r1, =charInput
+    bl scanf
+    cmp r0, 0
+    bleq readError
+    ldr r1, =charInput
+    ldr r1, [r1]
+    push {r1}
     pop {pc}
-buyDrPepper:
+
+completePurchase:
     push {lr}
 
-    pop {pc}
+    ldr r0, =strPurchaseComplete
+    mov r2, r5
+    bl printf
 
-buyCokeZero:
-    push {lr}
-
-    pop {pc}
-
-cancelPurchase:
-    push {lr}
-
-    bl returnMoney
-
-    pop {pc}
+    pop{pc}
 
 returnMoney:
     push {lr}
@@ -192,6 +228,24 @@ strChangeMessage: .asciz "You have recived %d cents back.\n\n\n"
 
 .balign 4
 strMoneyAdded: .asciz "You have entered %d cents.\n\n\n"
+
+.balign 4
+strConfirmBuy: .asciz "You have Chosen %s. Is this correct? (Y or N)\n"
+
+.balign 4
+strPurchaseComplete: .asciz "You have bought a %s and have recived %d cents as change.\n"
+
+.balign 4
+strCoke: .asciz "Coke\0"
+
+.balign 4
+strSprite: .asciz "Sprite\0"
+
+.balign 4
+strDrPepper: .asciz "Dr. Pepper\0"
+
+.balign 4
+strCokeZero: .asciz "Coke Zero\0"
 
 .balign 4
 charInputMode: .asciz " %c"
