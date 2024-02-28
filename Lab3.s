@@ -109,28 +109,24 @@ drinkSelection:
 
     cmp r4, #'C'
     ldr r1, =strCoke
-    mov r2, #55
     push {r6}
     bleq buy
     mov r6, r3
 
     cmp r4, #'S'
     ldr r1, =strSprite
-    mov r2, #55
     push {r7}
     bleq buy
     mov r7, r3
 
     cmp r4, #'P'
     ldr r1, =strDrPepper
-    mov r2, #55
     push {r8}
     bleq buy
     mov r8, r3
 
     cmp r4, #'Z'
     ldr r1, =strCokeZero
-    mov r2, #55
     push {r9}
     bleq buy
     mov r9, r3
@@ -161,7 +157,7 @@ buy:
         bl completePurchase
 
     return:
-        pop {pc}
+        pop {pc, r3}
 
 confirmPurchase:
     push {r1, lr}
@@ -222,7 +218,7 @@ exit:
 strWelcomeMessage: .asciz "Welcome to the vending machine. All drinks cost 55 cents.\n"
 
 .balign 4
-strMoneyMessage: .asciz "Please enter money or enter the secret password (L).\n\nYou may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B), or you may exit the machine with a refund (X).\n\n"
+strMoneyMessage: .asciz "Please enter money or the secret password (L).\n\nYou may enter money in the form of nickels (N), dimes (D), quarters (Q), or dollar bills (B), or you may exit the machine with a refund (X).\n\n"
 
 .balign 4
 strDrinkMessage: .asciz "You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n\n"
@@ -234,7 +230,7 @@ strChangeMessage: .asciz "You have recived %d cents back.\n\n\n"
 strMoneyAdded: .asciz "You have entered %d cents.\n\n\n"
 
 .balign 4
-strConfirmBuy: .asciz "You have Chosen %s. Is this correct? (Y or N)\n"
+strConfirmBuy: .asciz "You have chosen %s. Is this correct? (Y or N)\n"
 
 .balign 4
 strPurchaseComplete: .asciz "You have bought a %s and have recived %d cents as change.\n"
