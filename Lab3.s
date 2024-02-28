@@ -44,6 +44,16 @@ input:
     bleq addDollar
 
     cmp r4, #'C'
+    bleq buyCoke
+    cmp r4, #'S'
+    bleq buySprite
+    cmp r4, #'P'
+    bleq buyDrPepper
+    cmp r4, #'Z'
+    bleq buyCokeZero
+
+    cmp r4, #'X'
+    bleq cancelPurchase
 
     b input
 
