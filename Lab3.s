@@ -112,7 +112,6 @@ drinkSelection:
     cmp r0, #4
     beq exit
 
-    mov r2, #0
 
     ldr r0, =strDrinkMessage
     bl printf
@@ -123,6 +122,8 @@ drinkSelection:
     bleq readError
     ldr r1, =charInput
     ldr r4, [r1]
+
+    mov r2, #0
 
     cmp r4, #'C'
     ldreq r1, =strCoke
