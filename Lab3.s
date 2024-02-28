@@ -73,6 +73,7 @@ input:
     cmp r4, #'L'
     moveq r2, #1
     bleq admin
+    bleq input
 
     cmp r5, #55
     blge drinkSelection
@@ -91,7 +92,7 @@ admin:
     mov r3, r8
     push {r9}
     bl printf
-    pop {r9}
+    add sp, sp #4
 
     pop {r2, pc}
 
