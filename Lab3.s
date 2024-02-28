@@ -55,23 +55,35 @@ input:
 
 
 addNickel:
+    push {lr}
+
     add r5, r5, #5
-    bx lr
+
+    push {lr}
 
 addDime:
+    push {lr}
+
     add r5, r5, #10
-    bx lr
+
+    push {lr}
 
 addQuarter:
+    push {lr}
+
     add r5, r5, #25
-    bx lr
+
+    push {lr}
 
 addDollar:
+    push {lr}
+
     add r5, r5, #100
-    bx lr
+
+    push {lr}
 
 drinkSelection:
-    push {pc}
+    push {lr}
 
     ldr r0, =strDrinkMessage
     bl printf
@@ -88,42 +100,42 @@ drinkSelection:
     bleq cancelPurchase
 
 
-    pop {lr}
+    pop {pc}
 
 buyCoke:
-    push {pc}
+    push {lr}
 
-    pop {lr}
+    pop {pc}
 
 buySprite:
-    push {pc}
+    push {lr}
 
-    pop {lr}
+    pop {pc}
 buyDrPepper:
-    push {pc}
+    push {lr}
 
-    pop {lr}
+    pop {pc}
 
 buyCokeZero:
-    push {pc}
+    push {lr}
 
-    pop {lr}
+    pop {pc}
 
 cancelPurchase:
-    push {pc}
+    push {lr}
 
     bl returnMoney
 
-    pop {lr}
+    pop {pc}
 
 returnMoney:
-    push {pc}
+    push {lr}
 
     ldr r0, =strChangeMessage
     mov r1, r5
     bl printf
 
-    pop {lr}
+    pop {pc}
 
 readError:
     push {lr}
