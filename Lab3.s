@@ -167,7 +167,7 @@ confirmPurchase:
     ldr r0, =charInputMode
     ldr r1, =charInput
     bl scanf
-    cmp r0, 0
+    cmp r0, #0
     bleq readError
     ldr r1, =charInput
     ldr r1, [r1]
@@ -181,7 +181,7 @@ completePurchase:
     mov r2, r5
     bl printf
 
-    pop{pc}
+    pop {pc}
 
 returnMoney:
     push {lr}
