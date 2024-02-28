@@ -155,11 +155,11 @@ buy:
         sub r5, r5, r2
         sub r3, r3, #1
         bl completePurchase
+
+    return:
         pop {lr}
         push {r3}
         push {lr}
-
-    return:
         pop {pc}
 
 confirmPurchase:
