@@ -18,7 +18,7 @@ gdb ./Lab3
 @r6: Amount of Coke
 @r7: Amount of Sprite
 @r8: Amount of Dr. Pepper
-@r8: Amount of Coke Zero
+@r9: Amount of Coke Zero
 
 
 main:
@@ -27,6 +27,7 @@ main:
     mov r6, #2
     mov r7, #2
     mov r8, #2
+    mov r9, #2
 
 
     ldr r0, =strWelcomeMessage
@@ -44,15 +45,26 @@ input:
     ldr r4, [r1]
 
     cmp r4, #'N'
-    bleq addNickel
+    mov r1, #5
+    bleq addMoney
+
     cmp r4, #'D'
-    bleq addDime
+    mov r1, #10
+    bleq addMoney
+
     cmp r4, #'Q'
-    bleq addQuarter
+    mov r1, #25
+    bleq addMoney
+
     cmp r4, #'B'
-    bleq addDollar
+    mov r1, #100
+    bleq addMoney
+
     cmp r4, #'X'
     bleq returnMoney
+
+    cmp r4, #'L'
+    bleq admin
 
     cmp r5, #55
     blge drinkSelection
@@ -60,42 +72,22 @@ input:
     b input
 
 
+admin:
+    push {lr}
 
-addNickel:
+    ldr r0, =strAmountLeft
+    mov r1, r6
+    mov r2, r7
+    mov r3, r8
+    push {r9}
+    bl printf
+
+    pop {pc}
+
+addMoney:
     push {lr}
     
     ldr r0, =strMoneyAdded
-    mov r1, #5
-    add r5, r5, r1
-    bl printf
-
-    pop {pc}
-
-addDime:
-    push {lr}
-
-    ldr r0, =strMoneyAdded
-    mov r1, #10
-    add r5, r5, r1
-    bl printf
-
-    pop {pc}
-
-addQuarter:
-    push {lr}
-
-    ldr r0, =strMoneyAdded
-    mov r1, #25
-    add r5, r5, r1
-    bl printf
-
-    pop {pc}
-
-addDollar:
-    push {lr}
-
-    ldr r0, =strMoneyAdded
-    mov r1, #100
     add r5, r5, r1
     bl printf
 
@@ -122,14 +114,17 @@ drinkSelection:
     cmp r4, #'S'
     ldr r1, =strSprite
     mov r2, #55
+    push {r7}
     bleq buy
     cmp r4, #'P'
     ldr r1, =strDrPepper
     mov r2, #55
+    push {r8}
     bleq buy
     cmp r4, #'Z'
     ldr r1, =strCokeZero
     mov r2, #55
+    push {r9}
     bleq buy
     cmp r4, #'X'
     bleq returnMoney
@@ -233,6 +228,9 @@ strConfirmBuy: .asciz "You have Chosen %s. Is this correct? (Y or N)\n"
 
 .balign 4
 strPurchaseComplete: .asciz "You have bought a %s and have recived %d cents as change.\n"
+
+.balign 4
+strAmountLeft: .asciz "There are %d Coke(s), %d Sprite(s), %d Dr. Pepper(s), and %d Coke Zero(s) left.\n"
 
 .balign 4
 strCoke: .asciz "Coke"
