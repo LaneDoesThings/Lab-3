@@ -79,7 +79,7 @@ admin:
     mov r1, r6
     mov r2, r7
     mov r3, r8
-    push {r9}
+    @push {r9}
     bl printf
 
     pop {pc}
