@@ -43,6 +43,8 @@ input:
     cmp r4, #'B'
     bleq addDollar
 
+    cmp r4, #'C'
+
     b input
 
 
@@ -63,7 +65,39 @@ addDollar:
     add r5, r5, #100
     bx lr
 
+buyCoke:
+    bl checkMoney
+    bx lr
 
+buySprite:
+    bl checkMoney
+    bx lr
+
+buyDrPepper:
+    bl checkMoney
+    bx lr
+
+buyCokeZero:
+    bl checkMoney
+    bx lr
+
+cancelPurchase:
+    
+    bx lr
+
+checkMoney:
+    cmp r5, #55
+    bxlt lr
+
+    mov r6, #0
+    sub r6, #55, r5
+
+    ldr r0, =strNotEnoughMoney
+    mov r1, r5
+    mov r2, r6
+    bl printf
+
+    bx lr
 
 
 /*
@@ -87,6 +121,9 @@ charInputMode: .asciz "%c"
 
 .balign 4
 charInput: .ascii "a"
+
+.balign 4
+strNotEnoughMoney: .asciz "You need 55 cents to buy this drink but you only have %d cents entered please enter %d more.\n"
 
 
 .global printf
