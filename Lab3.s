@@ -40,7 +40,7 @@ strSelectionMessage: .asciz "Please enter money, select a drink, or enter the se
 charInputMode: .asciz "%c"
 
 .balign 4
-charInput: .byte 'a'
+charInput: .byte 'a\n'
 
 
 .global printf
