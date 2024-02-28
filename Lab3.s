@@ -156,7 +156,7 @@ buy:
         pop {pc}
 
 confirmPurchase:
-    push {lr, r1}
+    push {r1, lr}
 
     ldr r0, =strConfirmBuy
     bl printf
@@ -168,7 +168,7 @@ confirmPurchase:
     bleq readError
     ldr r1, =charInput
     ldr r0, [r1]
-    pop {pc, r1}
+    pop {r1, pc}
 
 completePurchase:
     push {lr}
