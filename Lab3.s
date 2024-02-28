@@ -34,8 +34,6 @@ main:
     bl printf
 
 input:
-    mov r2, #0
-
     ldr r0, =strMoneyMessage
     bl printf
     ldr r0, =charInputMode
@@ -45,6 +43,8 @@ input:
     bleq readError
     ldr r1, =charInput
     ldr r4, [r1]
+
+    mov r2, #0
 
     cmp r4, #'N'
     moveq r1, #5
@@ -83,7 +83,7 @@ input:
     beq input
 
 admin:
-    push {lr}
+    push {r2, lr}
 
     ldr r0, =strAmountLeft
     mov r1, r6
@@ -93,20 +93,20 @@ admin:
     bl printf
     pop {r9}
 
-    pop {pc}
+    pop {r2, pc}
 
 addMoney:
-    push {lr}
+    push {r2, lr}
     
     ldr r0, =strMoneyAdded
     add r5, r5, r1
     mov r2, r5
     bl printf
 
-    pop {pc}
+    pop {r2, pc}
 
 drinkSelection:
-    push {lr}
+    push {r2, lr}
 
     bl checkEmpty
     cmp r0, #4
@@ -161,7 +161,7 @@ drinkSelection:
     bleq drinkSelection
 
 
-    pop {pc}
+    pop {r2, pc}
 
 checkEmpty:
     push {lr}
@@ -247,7 +247,7 @@ returnMoney:
     pop {r2, pc}
 
 readError:
-    push {lr}
+    push {r2, lr}
 
     ldr r0, =strError
     bl printf
@@ -256,7 +256,7 @@ readError:
     ldr r1, =strInputError
     bl scanf
 
-    pop {pc}
+    pop {r2, pc}
 
 /*
 Exit with code 0 (success)
