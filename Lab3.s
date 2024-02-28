@@ -24,8 +24,13 @@ input:
 
 
 
-
-
+/*
+Exit with code 0 (success)
+ */
+exit:
+    mov r7, #0x01
+    mov r0, #0x00
+    svc 0
 
 .data
 
@@ -34,7 +39,7 @@ strWelcomeMessage: .asciz "Welcome to the vending machine. All drinks cost 55 ce
 
 .balign 4
 strSelectionMessage: .asciz "Please enter money, select a drink, or enter the secret password (password).\n You may enter money in the form of nickels (N), dimes (D), or dollar bills (B).\n
-                             You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n"
+You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n"
 
 .balign 4
 charInputMode: .asciz "%c"
