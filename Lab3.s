@@ -117,12 +117,13 @@ cancelPurchase:
     pop {lr}
 
 returnMoney:
+    push {pc}
+
     ldr r0, =strChangeMessage
     mov r1, r5
     bl printf
 
-    bx lr
-
+    pop {lr}
 
 readError:
     push {lr}
@@ -156,7 +157,7 @@ strMoneyMessage: .asciz "Please enter money, select a drink, or enter the secret
 strDrinkMessage: .asciz "You may select a drink of Coke (C), Sprite (S), Dr. Pepper (P), Coke Zero (Z), or you may exit the machine with a refund (X).\n\n"
 
 .balign 4
-strChangeMessage: .asciz "You have recived %d change back.\n"
+strChangeMessage: .asciz "You have recived %d cents back.\n"
 
 .balign 4
 charInputMode: .asciz " %c"
