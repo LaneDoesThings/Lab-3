@@ -34,6 +34,8 @@ main:
     bl printf
 
 input:
+    mov r2, #0
+
     ldr r0, =strMoneyMessage
     bl printf
     ldr r0, =charInputMode
@@ -45,32 +47,40 @@ input:
     ldr r4, [r1]
 
     cmp r4, #'N'
-    mov r1, #5
+    moveq r1, #5
+    moveq r2, #1
     bleq addMoney
 
     cmp r4, #'D'
-    mov r1, #10
+    moveq r1, #10
+    moveq r2, #1
     bleq addMoney
 
     cmp r4, #'Q'
-    mov r1, #25
+    moveq r1, #25
+    moveq r2, #1
     bleq addMoney
 
     cmp r4, #'B'
-    mov r1, #100
+    moveq r1, #100
+    moveq r2, #1
     bleq addMoney
 
     cmp r4, #'X'
+    moveq r2, #1
     bleq returnMoney
 
     cmp r4, #'L'
+    moveq r2, #1
     bleq admin
 
     cmp r5, #55
     blge drinkSelection
 
-    b input
 
+    cmp r2, #0
+    bleq readError
+    beq input
 
 admin:
     push {lr}
@@ -147,6 +157,7 @@ drinkSelection:
     bleq returnMoney
 
     cmp r2, #0
+    bleq readError
     bleq drinkSelection
 
 
