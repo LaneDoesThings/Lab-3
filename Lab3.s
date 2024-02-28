@@ -206,6 +206,8 @@ buy:
         mov r2, #0
         push {r2}
 
+        b return
+
     purchase:
         mov r2, #55
         sub r5, r5, r2
