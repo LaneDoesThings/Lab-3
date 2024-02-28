@@ -149,9 +149,7 @@ buy:
     purchase:
         mov r2, #55
         sub r5, r5, r2
-        push {r3}
         bl completePurchase
-        pop {r3}
         sub r3, r3, #1
         pop {pc}
 
