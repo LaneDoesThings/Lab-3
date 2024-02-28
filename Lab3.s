@@ -83,9 +83,6 @@ admin:
     bl printf
     pop {r9}
 
-    ldr r0, =charInputMode
-    bl scanf
-
     pop {pc}
 
 addMoney:
@@ -115,21 +112,29 @@ drinkSelection:
     mov r2, #55
     push {r6}
     bleq buy
+    mov r6, r3
+
     cmp r4, #'S'
     ldr r1, =strSprite
     mov r2, #55
     push {r7}
     bleq buy
+    mov r7, r3
+
     cmp r4, #'P'
     ldr r1, =strDrPepper
     mov r2, #55
     push {r8}
     bleq buy
+    mov r8, r3
+
     cmp r4, #'Z'
     ldr r1, =strCokeZero
     mov r2, #55
     push {r9}
     bleq buy
+    mov r9, r3
+
     cmp r4, #'X'
     bleq returnMoney
 
@@ -152,6 +157,7 @@ buy:
     purchase:
         mov r2, #55
         sub r5, r5, r2
+        sub r3, r3, #1
         bl completePurchase
 
     return:
