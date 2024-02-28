@@ -153,6 +153,7 @@ buy:
         bl completePurchase
         pop {r3}
         sub r3, r3, #1
+        pop {pc}
 
     return:
         pop {pc}
