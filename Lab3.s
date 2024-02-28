@@ -191,6 +191,7 @@ completePurchase:
     ldr r0, =strPurchaseComplete
     mov r2, r5
     bl printf
+    mov r5, #0
 
     pop {r3, pc}
 
