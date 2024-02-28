@@ -175,13 +175,13 @@ confirmPurchase:
     pop {r1, pc}
 
 completePurchase:
-    push {lr}
+    push {r3, lr}
 
     ldr r0, =strPurchaseComplete
     mov r2, r5
     bl printf
 
-    pop {pc}
+    pop {r3, pc}
 
 returnMoney:
     push {lr}
