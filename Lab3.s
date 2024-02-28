@@ -69,12 +69,10 @@ input:
     cmp r4, #'X'
     moveq r2, #1
     bleq returnMoney
-    bleq input
 
     cmp r4, #'L'
     moveq r2, #1
     bleq admin
-    bleq input
 
     cmp r5, #55
     blge drinkSelection
@@ -82,7 +80,7 @@ input:
 
     cmp r2, #0
     bleq readError
-    beq input
+    b input
 
 admin:
     push {r2, lr}
