@@ -14,11 +14,11 @@ gdb ./Lab3
 .global main
 
 main:
-    mov r0, =strWelcomeMessage
+    ldr r0, =strWelcomeMessage
     bl printf
 
 input:
-    mov r0, =strSelectionMessage
+    ldr r0, =strSelectionMessage
     bl scanf
 
 
@@ -40,7 +40,7 @@ strSelectionMessage: .asciz "Please enter money, select a drink, or enter the se
 charInputMode: .asciz "%c"
 
 .balign 4
-charInput: .char 'a'
+charInput: .byte 'a'
 
 
 .global printf
