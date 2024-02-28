@@ -134,7 +134,7 @@ drinkSelection:
     cmp r4, #'X'
     bleq returnMoney
 
-    bl drinkSelection
+    blneq drinkSelection
 
 
     pop {pc}
