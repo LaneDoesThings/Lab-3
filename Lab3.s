@@ -138,9 +138,9 @@ drinkSelection:
     pop {pc}
 
 buy:
+    pop {r3}
     push {lr}
 
-    pop {r3}
 
     bl confirmPurchase
     cmp r0, #'N'
