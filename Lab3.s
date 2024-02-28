@@ -56,29 +56,41 @@ input:
 
 addNickel:
     push {lr}
-
-    add r5, r5, #5
+    
+    ldr r0, =strMoneyAdded
+    mov r1, #5
+    bl printf
+    add r5, r5, r1
 
     pop {pc}
 
 addDime:
     push {lr}
 
-    add r5, r5, #10
+    ldr r0, =strMoneyAdded
+    mov r1, #10
+    bl printf
+    add r5, r5, r1
 
     pop {pc}
 
 addQuarter:
     push {lr}
 
-    add r5, r5, #25
+    ldr r0, =strMoneyAdded
+    mov r1, #25
+    bl printf
+    add r5, r5, r1
 
     pop {pc}
 
 addDollar:
     push {lr}
 
-    add r5, r5, #100
+    ldr r0, =strMoneyAdded
+    mov r1, #100
+    bl printf
+    add r5, r5, r1
 
     pop {pc}
 
@@ -177,6 +189,9 @@ strDrinkMessage: .asciz "You may select a drink of Coke (C), Sprite (S), Dr. Pep
 
 .balign 4
 strChangeMessage: .asciz "You have recived %d cents back.\n"
+
+.balign 4
+strMoneyAdded: .asciz "You have entered %d cents.\n"
 
 .balign 4
 charInputMode: .asciz " %c"
