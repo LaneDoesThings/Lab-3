@@ -134,6 +134,8 @@ drinkSelection:
     cmp r4, #'X'
     bleq returnMoney
 
+    bl drinkSelection
+
 
     pop {pc}
 
@@ -144,6 +146,7 @@ buy:
 
     bl confirmPurchase
     cmp r0, #'N'
+    moveq r0, r3
     beq return
     cmp r0, #'Y'
     beq purchase
