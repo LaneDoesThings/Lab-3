@@ -200,6 +200,7 @@ returnMoney:
     ldr r0, =strChangeMessage
     mov r1, r5
     bl printf
+    mov r5, #0
 
     pop {r2, pc}
 
