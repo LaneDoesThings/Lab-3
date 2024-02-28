@@ -69,6 +69,7 @@ input:
     cmp r4, #'X'
     moveq r2, #1
     bleq returnMoney
+    bleq input
 
     cmp r4, #'L'
     moveq r2, #1
@@ -285,7 +286,7 @@ strDrinkMessage: .asciz "You may select a drink of Coke (C), Sprite (S), Dr. Pep
 strChangeMessage: .asciz "You have recived %d cents back.\n\n\n"
 
 .balign 4
-strMoneyAdded: .asciz "You have entered %d cents and the total entered is %d.\n\n\n"
+strMoneyAdded: .asciz "You have entered %d cents and the total entered is %d cents.\n\n\n"
 
 .balign 4
 strConfirmBuy: .asciz "You have chosen %s. Is this correct? (Y or N)\n"
