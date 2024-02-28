@@ -30,6 +30,10 @@ input:
     ldr r1, =charInput
     ldr r4, [r1]
 
+    ldr r0, =charInputMode
+    mov r1, r4
+    bl printf
+
 
 addNickel:
 push {pc}
