@@ -77,7 +77,7 @@ strSelectionMessage: .asciz "Please enter money, select a drink, or enter the se
 strInputMode: .asciz "%s"
 
 .balign 4
-strInput: .string "a\n"
+strInput: .ascii "a"
 
 
 .global printf
