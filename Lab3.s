@@ -109,7 +109,7 @@ drinkSelection:
 
     cmp r4, #'C'
     ldr r1, =strCoke
-    push {r6}
+    pusheq {r6}
     bleq buy
 
     cmp r4, #'S'
