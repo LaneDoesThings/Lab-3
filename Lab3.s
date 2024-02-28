@@ -159,7 +159,10 @@ drinkSelection:
 
     cmp r2, #0
     bleq readError
-    bge drinkSelection
+    beq drinkSelection
+
+    cmp r2, #2
+    beq drinkSelection
 
 
     pop {r2, pc}
